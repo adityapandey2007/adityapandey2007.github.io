@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #0f172a;
+    background: linear-gradient(135deg, #0f172a, #020617);
     color: white;
 }
 
@@ -17,8 +17,8 @@ body {
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background: #020617;
+    padding: 15px 30px;
+    background: rgba(0,0,0,0.5);
     position: sticky;
     top: 0;
 }
@@ -33,12 +33,34 @@ header {
     text-align: center;
     padding: 80px 20px;
 }
+
+header img {
+    width: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #38bdf8;
+}
+
 header h1 {
     font-size: 40px;
     color: #38bdf8;
 }
-header p {
+
+.typing {
     font-size: 18px;
+    border-right: 2px solid white;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(30), blink .7s infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 260px }
+}
+@keyframes blink {
+    50% { border-color: transparent }
 }
 
 /* Sections */
@@ -57,22 +79,23 @@ h2 {
     background: #1e293b;
     padding: 20px;
     margin: 10px 0;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: 0.3s;
 }
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
     background: #334155;
 }
 
-/* Button */
+/* Buttons */
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background: #38bdf8;
-    color: black;
-    border-radius: 5px;
+    background: linear-gradient(45deg, #38bdf8, #6366f1);
+    color: white;
+    border-radius: 6px;
     text-decoration: none;
+    margin-top: 10px;
 }
 
 /* Footer */
@@ -80,6 +103,11 @@ footer {
     text-align: center;
     padding: 20px;
     background: #020617;
+}
+
+/* Mobile */
+@media(max-width:600px){
+    header h1 { font-size: 28px; }
 }
 </style>
 </head>
@@ -97,15 +125,23 @@ footer {
 </nav>
 
 <header>
+    <!-- 👤 Profile Photo -->
+    <img src="https://via.placeholder.com/120" alt="Profile Photo">
+
     <h1>Hi, I'm Aditya 👋</h1>
-    <p>BTech CSE (AI/ML) Student | Future Developer 🚀</p>
-    <a href="#contact" class="btn">Contact Me</a>
+
+    <!-- 🎬 Typing Animation -->
+    <p class="typing">CSE AI/ML Student | Developer 🚀</p>
+
+    <br>
+    <!-- 📄 Resume Button -->
+    <a href="#" class="btn">Download Resume</a>
 </header>
 
 <section id="about">
     <h2>About Me</h2>
     <div class="card">
-        <p>I am a passionate CSE (AI/ML) student who loves building smart systems and websites. I enjoy learning new technologies and solving real-world problems.</p>
+        <p>I am a passionate CSE (AI/ML) student who loves building smart systems and modern web applications.</p>
     </div>
 </section>
 
@@ -121,23 +157,23 @@ footer {
     <h2>Projects</h2>
     <div class="card">
         <h3>Smart Gesture Light & Fan Control</h3>
-        <p>Control home appliances using hand gestures with sensors and automation.</p>
+        <p>Control home appliances using gesture-based automation system.</p>
     </div>
 </section>
 
 <section id="contact">
     <h2>Contact</h2>
     <div class="card">
-        <p>Email: adityapandey2007dav@gmail.com</p>
-        <p>LinkedIn: https://www.linkedin.com/in/aditya-pandey-a33798379?utm_source=share_via&utm_content=profile&utm_medium=member_android</p>
-        <p>GitHub: https://github.com/adityapandey2007</p>
-        <p>Instagram: https://www.instagram.com/adityaaah4uall?igsh=NXF0YW00djdxNXoz</p>
+        <p>Email: your@email.com</p>
+        <p>LinkedIn: your-link</p>
+        <p>GitHub: your-link</p>
     </div>
 </section>
 
 <footer>
-    <p>© 2026 Aditya Pandey | Portfolio</p>
+    <p>© 2026 Aditya Pandey</p>
 </footer>
 
 </body>
 </html>
+
