@@ -27,7 +27,7 @@ body{
     color:var(--text);
 }
 
-/* 🌊 Animated BG */
+/* 🌊 Background */
 body::before{
     content:"";
     position:fixed;
@@ -65,17 +65,34 @@ nav a{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:15px;
 }
 
-/* PROFILE */
-.profile-pic{
-    width:220px;
-    height:260px;
+/* PROFILE FIXED */
+.profile-wrapper{
+    padding:10px;
     border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    margin-bottom:20px;
 }
 
-/* 🌈 GRADIENT TEXT FIXED */
+.profile-pic{
+    width:200px;
+    height:auto;
+    border-radius:16px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.4),
+        0 0 20px rgba(168,85,247,0.3);
+
+    transition:0.3s;
+}
+
+.profile-pic:hover{
+    transform:translateY(-5px) scale(1.03);
+}
+
+/* TEXT */
 .gradient-text{
     font-size:50px;
     background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
@@ -97,12 +114,13 @@ nav a{
     border-radius:6px;
     color:white;
     text-decoration:none;
+    margin-top:15px;
     margin-bottom:25px;
 }
 
 /* SOCIAL */
 .social{
-    margin-top:20px;
+    margin-top:10px;
 }
 .social i{
     margin:10px;
@@ -131,7 +149,7 @@ section{
     gap:20px;
 }
 
-/* 🟣 CURSOR GLOW */
+/* CURSOR */
 .cursor-glow{
     position:fixed;
     width:40px;
@@ -171,7 +189,10 @@ section{
 </nav>
 
 <header id="hero">
+
+<div class="profile-wrapper">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
+</div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
 <p>CSE AI/ML Student 🚀</p>
@@ -184,11 +205,14 @@ section{
 <a href="#"><i class="fab fa-github"></i></a>
 <a href="#"><i class="fas fa-envelope"></i></a>
 </div>
+
 </header>
 
 <section id="about" class="reveal">
 <h2>About</h2>
-<div class="card">Passionate AI/ML student building real-world projects.</div>
+<div class="card">
+Passionate AI/ML student building real-world projects.
+</div>
 </section>
 
 <section id="skills" class="reveal">
