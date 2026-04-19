@@ -27,7 +27,7 @@ body{
     color:var(--text);
 }
 
-/* 🌊 BG */
+/* 🌊 Background */
 body::before{
     content:"";
     position:fixed;
@@ -37,9 +37,6 @@ body::before{
                 radial-gradient(circle,#6366f1,transparent);
     animation: move 12s infinite alternate;
     z-index:-1;
-}
-@keyframes move{
-    to{transform:translate(-150px,-150px);}
 }
 
 /* NAV */
@@ -62,8 +59,13 @@ nav a{
 #hero{
     text-align:center;
     padding:120px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
 }
 
+/* PROFILE */
 .profile-pic{
     width:220px;
     height:260px;
@@ -87,9 +89,13 @@ nav a{
     border-radius:6px;
     color:white;
     text-decoration:none;
+    margin-bottom:25px;
 }
 
 /* SOCIAL */
+.social{
+    margin-top:20px;
+}
 .social i{
     margin:10px;
     font-size:22px;
@@ -102,13 +108,12 @@ section{
     margin:auto;
 }
 
-/* CARD */
+/* CARDS */
 .card{
     background:var(--card);
     padding:25px;
     border-radius:15px;
     margin:20px 0;
-    cursor:pointer;
 }
 
 /* GRID */
@@ -175,9 +180,7 @@ section{
 
 <section id="about" class="reveal">
 <h2>About</h2>
-<div class="card">
-Passionate AI/ML student building real-world projects and improving continuously.
-</div>
+<div class="card">Passionate AI/ML student building real-world projects.</div>
 </section>
 
 <section id="skills" class="reveal">
@@ -197,27 +200,17 @@ Passionate AI/ML student building real-world projects and improving continuously
 </div>
 </section>
 
-<!-- 🔥 UPDATED CERTIFICATES -->
 <section id="certifications" class="reveal">
 <h2>Certificates</h2>
 <div class="grid">
 
-<a href="YOUR_PYTHON_CERTIFICATE_LINK" target="_blank">
-<div class="card">🐍 Python Certificate</div>
-</a>
-
-<a href="YOUR_AI_CERTIFICATE_LINK" target="_blank">
-<div class="card">🤖 AI & ML Certificate</div>
-</a>
-
-<a href="YOUR_HACKATHON_CERTIFICATE_LINK" target="_blank">
-<div class="card">🏆 Hackathon Certificate</div>
-</a>
+<a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
+<a href="#" target="_blank"><div class="card">🤖 AI & ML Certificate</div></a>
+<a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
 
 </div>
 </section>
 
-<!-- 🔥 UPDATED CONTACT -->
 <section id="contact" class="reveal">
 <h2>Contact</h2>
 <div class="card">
