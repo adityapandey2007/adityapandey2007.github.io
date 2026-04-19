@@ -28,7 +28,7 @@ body {
     transition:0.3s;
 }
 
-/* 🌊 Animated BG */
+/* 🌊 Background */
 body::before{
     content:"";
     position:fixed;
@@ -79,7 +79,6 @@ nav a{
     -webkit-text-fill-color:transparent;
     animation:shine 4s linear infinite;
 }
-
 @keyframes shine{
     to{background-position:200%;}
 }
@@ -93,6 +92,20 @@ nav a{
     color:white;
     text-decoration:none;
     transition:0.2s;
+}
+
+/* SOCIAL */
+.social{
+    margin-top:20px;
+}
+.social i{
+    margin:10px;
+    font-size:22px;
+    transition:0.3s;
+}
+.social i:hover{
+    color:#38bdf8;
+    transform:scale(1.2);
 }
 
 /* SECTIONS */
@@ -118,7 +131,7 @@ section{
     gap:20px;
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 .reveal{
     opacity:0;
     transform:translateY(60px);
@@ -174,12 +187,20 @@ footer{
     <img src="https://via.placeholder.com/140" class="profile-pic">
     <h1 class="gradient-text">Aditya Pandey</h1>
     <p>CSE AI/ML Student 🚀</p>
+
     <a href="#" class="btn magnet">Download Resume</a>
+
+    <div class="social">
+        <a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:youremail@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
 </header>
 
 <section id="about" class="reveal">
     <h2>About</h2>
-    <div class="card">Passionate developer building AI solutions.</div>
+    <div class="card">Passionate developer building AI & web solutions.</div>
 </section>
 
 <section id="skills" class="reveal">
@@ -208,7 +229,7 @@ footer{
 
 <section id="contact" class="reveal">
     <h2>Contact</h2>
-    <div class="card">your@email.com</div>
+    <div class="card">youremail@gmail.com</div>
 </section>
 
 <footer>
@@ -220,16 +241,6 @@ footer{
 function toggleMode(){
     document.body.classList.toggle("light");
 }
-
-// SCROLL REVEAL
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-    reveals.forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight-100){
-            el.classList.add("active");
-        }
-    });
-});
 
 // CURSOR GLOW
 const glow=document.querySelector(".cursor-glow");
@@ -244,20 +255,27 @@ document.querySelectorAll(".magnet").forEach(btn=>{
         const rect=btn.getBoundingClientRect();
         const x=e.clientX - rect.left - rect.width/2;
         const y=e.clientY - rect.top - rect.height/2;
-
         btn.style.transform=`translate(${x*0.2}px, ${y*0.2}px)`;
     });
-
     btn.addEventListener("mouseleave",()=>{
         btn.style.transform="translate(0,0)";
     });
 });
 
-// SMOOTH NAV + PAGE TRANSITION
+// SCROLL ANIMATION
+const reveals=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>{
+    reveals.forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight-100){
+            el.classList.add("active");
+        }
+    });
+});
+
+// NAV + TRANSITION
 document.querySelectorAll("nav a").forEach(link=>{
     link.addEventListener("click",(e)=>{
         e.preventDefault();
-
         const target=document.querySelector(link.getAttribute("href"));
         document.body.classList.add("fade-out");
 
