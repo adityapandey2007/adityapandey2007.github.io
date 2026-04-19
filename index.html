@@ -27,7 +27,7 @@ body{
     color:var(--text);
 }
 
-/* 🌊 Background */
+/* 🌊 BG */
 body::before{
     content:"";
     position:fixed;
@@ -37,9 +37,6 @@ body::before{
                 radial-gradient(circle,#6366f1,transparent);
     animation: move 12s infinite alternate;
     z-index:-1;
-}
-@keyframes move{
-    to{transform:translate(-150px,-150px);}
 }
 
 /* NAV */
@@ -67,29 +64,35 @@ nav a{
     align-items:center;
 }
 
-/* PROFILE FIXED */
+/* PROFILE */
 .profile-wrapper{
-    padding:10px;
+    padding:12px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
     margin-bottom:20px;
+
+    animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
 }
 
 .profile-pic{
     width:200px;
     height:auto;
     border-radius:16px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.4),
-        0 0 20px rgba(168,85,247,0.3);
-
-    transition:0.3s;
 }
 
-.profile-pic:hover{
-    transform:translateY(-5px) scale(1.03);
+/* FLOAT */
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* GLOW */
+@keyframes glowPulse{
+    0%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
+    50%{box-shadow:0 0 30px rgba(168,85,247,0.6);}
+    100%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
 }
 
 /* TEXT */
@@ -103,8 +106,8 @@ nav a{
 }
 
 @keyframes shine{
-    0%{background-position:0% 50%;}
-    100%{background-position:300% 50%;}
+    0%{background-position:0%}
+    100%{background-position:300%}
 }
 
 /* BUTTON */
@@ -114,17 +117,23 @@ nav a{
     border-radius:6px;
     color:white;
     text-decoration:none;
-    margin-top:15px;
-    margin-bottom:25px;
+    margin:20px 0;
 }
 
 /* SOCIAL */
-.social{
-    margin-top:10px;
-}
 .social i{
     margin:10px;
     font-size:22px;
+}
+
+/* CURSOR */
+.cursor-glow{
+    position:fixed;
+    width:40px;
+    height:40px;
+    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
+    border-radius:50%;
+    pointer-events:none;
 }
 
 /* SECTIONS */
@@ -149,25 +158,14 @@ section{
     gap:20px;
 }
 
-/* CURSOR */
-.cursor-glow{
-    position:fixed;
-    width:40px;
-    height:40px;
-    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
-    border-radius:50%;
-    pointer-events:none;
+/* TYPING */
+#typing::after{
+    content:"|";
+    animation:blink 1s infinite;
 }
 
-/* SCROLL */
-.reveal{
-    opacity:0;
-    transform:translateY(60px);
-    transition:1s;
-}
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
+@keyframes blink{
+    50%{opacity:0;}
 }
 </style>
 </head>
@@ -190,12 +188,14 @@ section{
 
 <header id="hero">
 
-<div class="profile-wrapper">
+<div class="profile-wrapper" id="profile">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 </div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
-<p>CSE AI/ML Student 🚀</p>
+
+<p id="typing"></p>
+<p id="roles"></p>
 
 <a href="#" class="btn">Download Resume</a>
 
@@ -208,51 +208,40 @@ section{
 
 </header>
 
-<section id="about" class="reveal">
-<h2>About</h2>
-<div class="card">
-Passionate AI/ML student building real-world projects.
-</div>
-</section>
+<section id="about"><h2>About</h2><div class="card">AI/ML student passionate about building real-world solutions.</div></section>
 
-<section id="skills" class="reveal">
-<h2>Skills</h2>
+<section id="skills"><h2>Skills</h2>
 <div class="grid">
 <div class="card">Python</div>
 <div class="card">C</div>
-<div class="card">HTML | CSS | JS</div>
+<div class="card">Web Development</div>
 </div>
 </section>
 
-<section id="projects" class="reveal">
-<h2>Projects</h2>
+<section id="projects"><h2>Projects</h2>
 <div class="grid">
 <div class="card">Gesture Control System</div>
 <div class="card">Portfolio Website</div>
 </div>
 </section>
 
-<section id="certifications" class="reveal">
-<h2>Certificates</h2>
+<section id="certifications"><h2>Certificates</h2>
 <div class="grid">
 <a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
-<a href="#" target="_blank"><div class="card">🤖 AI & ML Certificate</div></a>
+<a href="#" target="_blank"><div class="card">🤖 AI/ML Certificate</div></a>
 <a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
 </div>
 </section>
 
-<section id="contact" class="reveal">
-<h2>Contact</h2>
+<section id="contact"><h2>Contact</h2>
 <div class="card">
-📧 Email: your@email.com <br><br>
-📍 Location: Your City, India <br><br>
-📱 Mobile: +91 XXXXX XXXXX
+📧 your@email.com <br><br>
+📍 Your City, India <br><br>
+📱 +91 XXXXX XXXXX
 </div>
 </section>
 
-<footer>
-© 2026 Aditya Pandey
-</footer>
+<footer>© 2026 Aditya Pandey</footer>
 
 <script>
 // MODE
@@ -267,24 +256,35 @@ glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-// SCROLL
-document.querySelectorAll("nav a").forEach(link=>{
-link.addEventListener("click",(e)=>{
-e.preventDefault();
-const target=document.querySelector(link.getAttribute("href"));
-window.scrollTo({top:target.offsetTop-80,behavior:"smooth"});
+// CURSOR REACT ON PROFILE
+const profile=document.getElementById("profile");
+profile.addEventListener("mouseenter",()=>{
+glow.style.transform="scale(2)";
 });
+profile.addEventListener("mouseleave",()=>{
+glow.style.transform="scale(1)";
 });
 
-// REVEAL
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-reveals.forEach(el=>{
-if(el.getBoundingClientRect().top < window.innerHeight-100){
-el.classList.add("active");
+// TYPING
+const text="AI/ML Student 🚀";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,50);
 }
-});
-});
+}
+type();
+
+// ROTATING ROLES
+const roles=["I build AI Projects","I create Web Apps","I solve real problems"];
+let j=0;
+
+setInterval(()=>{
+document.getElementById("roles").innerHTML=roles[j];
+j=(j+1)%roles.length;
+},2000);
 </script>
 
 </body>
