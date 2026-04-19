@@ -27,7 +27,7 @@ body{
     color:var(--text);
 }
 
-/* 🌊 Background */
+/* 🌊 Animated BG */
 body::before{
     content:"";
     position:fixed;
@@ -37,6 +37,9 @@ body::before{
                 radial-gradient(circle,#6366f1,transparent);
     animation: move 12s infinite alternate;
     z-index:-1;
+}
+@keyframes move{
+    to{transform:translate(-150px,-150px);}
 }
 
 /* NAV */
@@ -72,14 +75,19 @@ nav a{
     border-radius:20px;
 }
 
-/* TEXT */
+/* 🌈 GRADIENT TEXT FIXED */
 .gradient-text{
     font-size:50px;
     background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
-    background-size:200%;
+    background-size:300%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:shine 4s linear infinite;
+    animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+    0%{background-position:0% 50%;}
+    100%{background-position:300% 50%;}
 }
 
 /* BUTTON */
@@ -123,7 +131,7 @@ section{
     gap:20px;
 }
 
-/* CURSOR */
+/* 🟣 CURSOR GLOW */
 .cursor-glow{
     position:fixed;
     width:40px;
@@ -168,7 +176,7 @@ section{
 <h1 class="gradient-text">Aditya Pandey</h1>
 <p>CSE AI/ML Student 🚀</p>
 
-<a href="#" class="btn magnet">Download Resume</a>
+<a href="#" class="btn">Download Resume</a>
 
 <div class="social">
 <a href="#"><i class="fab fa-instagram"></i></a>
@@ -203,11 +211,9 @@ section{
 <section id="certifications" class="reveal">
 <h2>Certificates</h2>
 <div class="grid">
-
 <a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
 <a href="#" target="_blank"><div class="card">🤖 AI & ML Certificate</div></a>
 <a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
-
 </div>
 </section>
 
