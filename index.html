@@ -25,10 +25,10 @@ body {
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
-    scroll-behavior:smooth;
+    transition:0.3s;
 }
 
-/* 🌊 Animated Background */
+/* 🌊 Animated BG */
 body::before{
     content:"";
     position:fixed;
@@ -60,33 +60,27 @@ nav .links a{
 }
 
 /* HERO */
-#hero {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:120px 50px;
-    flex-wrap:wrap;
+#hero{
+    text-align:center;
+    padding:120px 20px;
 }
 
-.hero-text h1{
-    font-size:50px;
+.profile-pic{
+    width:140px;
+    border-radius:50%;
+    border:3px solid #38bdf8;
 }
 
 .gradient-text{
+    font-size:50px;
     background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
     background-size:200%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:shine 4s linear infinite;
 }
-
 @keyframes shine{
     to{background-position:200%;}
-}
-
-.hero-img img{
-    width:320px;
-    transition:transform 0.2s ease;
 }
 
 /* BUTTON */
@@ -96,6 +90,14 @@ nav .links a{
     border-radius:6px;
     color:white;
     text-decoration:none;
+    display:inline-block;
+    margin-top:10px;
+}
+
+/* SOCIAL */
+.social i{
+    margin:10px;
+    font-size:22px;
 }
 
 /* SECTIONS */
@@ -114,7 +116,6 @@ section{
     margin:20px 0;
     transition:.3s;
 }
-
 .card:hover{
     transform:scale(1.05);
 }
@@ -124,12 +125,6 @@ section{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
-}
-
-/* SOCIAL */
-.social i{
-    margin:10px;
-    font-size:22px;
 }
 
 /* SCROLL ANIMATION */
@@ -165,23 +160,18 @@ footer{
     </div>
 </nav>
 
-<!-- HERO WITH INTERACTIVE AVATAR -->
 <header id="hero">
-    <div class="hero-text">
-        <h1 class="gradient-text">Aditya Pandey</h1>
-        <p>CSE AI/ML Student 🚀</p>
-        <a href="#" class="btn">Download Resume</a>
+    <img src="https://via.placeholder.com/140" class="profile-pic">
+    <h1 class="gradient-text">Aditya Pandey</h1>
+    <p>CSE AI/ML Student 🚀</p>
 
-        <div class="social">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
-        </div>
-    </div>
+    <a href="#" class="btn">Download Resume</a>
 
-    <div class="hero-img">
-        <img src="https://i.imgur.com/6VBx3io.png" id="avatar">
+    <div class="social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
     </div>
 </header>
 
@@ -237,6 +227,18 @@ window.onload = () => {
     }
 };
 
+// SMOOTH SCROLL
+document.querySelectorAll('nav a').forEach(anchor=>{
+    anchor.addEventListener('click',function(e){
+        e.preventDefault();
+        const target=document.querySelector(this.getAttribute('href'));
+        window.scrollTo({
+            top:target.offsetTop-80,
+            behavior:'smooth'
+        });
+    });
+});
+
 // SCROLL ANIMATION
 const reveals=document.querySelectorAll(".reveal");
 window.addEventListener("scroll",()=>{
@@ -245,15 +247,6 @@ window.addEventListener("scroll",()=>{
             el.classList.add("active");
         }
     });
-});
-
-// AVATAR INTERACTION
-const avatar = document.getElementById("avatar");
-document.addEventListener("mousemove", (e) => {
-    let x = (window.innerWidth / 2 - e.clientX) / 25;
-    let y = (window.innerHeight / 2 - e.clientY) / 25;
-
-    avatar.style.transform = `rotateY(${x}deg) rotateX(${y}deg) scale(1.05)`;
 });
 </script>
 
