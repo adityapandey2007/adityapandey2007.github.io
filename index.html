@@ -10,7 +10,7 @@
 <style>
 :root {
     --bg:#0f172a;
-    --text:#ffffff;
+    --text:#fff;
     --card:rgba(255,255,255,0.08);
 }
 
@@ -22,14 +22,14 @@
 
 body {
     margin:0;
-    font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
     scroll-behavior:smooth;
     transition:0.3s;
 }
 
-/* 🌊 Animated Background */
+/* 🌊 Animated BG */
 body::before{
     content:"";
     position:fixed;
@@ -44,7 +44,7 @@ body::before{
     to{transform:translate(-150px,-150px);}
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
     display:flex;
     justify-content:space-between;
@@ -59,9 +59,6 @@ nav .links a{
     color:var(--text);
     text-decoration:none;
 }
-nav .links a:hover{
-    color:#38bdf8;
-}
 
 /* HERO */
 header{
@@ -74,8 +71,16 @@ header img{
     border-radius:50%;
 }
 
-header h1{
+.gradient-text{
     font-size:50px;
+    background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 4s linear infinite;
+}
+@keyframes shine{
+    to{background-position:200%;}
 }
 
 /* SECTIONS */
@@ -94,9 +99,6 @@ section{
     margin:20px 0;
     transition:.3s;
 }
-.card:hover{
-    transform:scale(1.05);
-}
 
 /* GRID */
 .grid{
@@ -112,22 +114,40 @@ section{
     border-radius:6px;
     color:white;
     text-decoration:none;
+    transition:0.3s;
+}
+.btn:hover{
+    box-shadow:0 0 20px #38bdf8;
 }
 
 /* SOCIAL */
 .social i{
     margin:10px;
     font-size:22px;
-    transition:0.3s;
-}
-.social i:hover{
-    color:#38bdf8;
 }
 
-/* CERTIFICATE */
-.cert{
-    text-align:center;
-    font-weight:bold;
+/* REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s;
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* TITLE ANIMATION */
+h2::after{
+    content:"";
+    display:block;
+    width:0%;
+    height:3px;
+    background:#38bdf8;
+    transition:0.5s;
+}
+h2:hover::after{
+    width:100%;
 }
 
 /* FOOTER */
@@ -148,13 +168,13 @@ footer{
         <a href="#projects">Projects</a>
         <a href="#certifications">Certificates</a>
         <a href="#contact">Contact</a>
-        <span onclick="toggleMode()" style="cursor:pointer;">🌓</span>
+        <span onclick="toggleMode()">🌓</span>
     </div>
 </nav>
 
 <header>
     <img src="https://via.placeholder.com/140">
-    <h1>Aditya Pandey</h1>
+    <h1 class="gradient-text">Aditya Pandey</h1>
     <p>CSE AI/ML Student 🚀</p>
     <a href="#" class="btn">Download Resume</a>
 
@@ -166,14 +186,12 @@ footer{
     </div>
 </header>
 
-<section id="about">
+<section id="about" class="reveal">
     <h2>About</h2>
-    <div class="card">
-        Passionate developer building AI & web solutions.
-    </div>
+    <div class="card">Passionate developer building AI & web solutions.</div>
 </section>
 
-<section id="skills">
+<section id="skills" class="reveal">
     <h2>Skills</h2>
     <div class="grid">
         <div class="card">Python</div>
@@ -183,7 +201,7 @@ footer{
     </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="reveal">
     <h2>Projects</h2>
     <div class="grid">
         <div class="card">Gesture Control System</div>
@@ -191,20 +209,17 @@ footer{
     </div>
 </section>
 
-<section id="certifications">
+<section id="certifications" class="reveal">
     <h2>Certifications</h2>
     <div class="grid">
-        <div class="card cert">Python Certificate</div>
-        <div class="card cert">Web Development Certificate</div>
-        <div class="card cert">AI/ML Certificate</div>
+        <div class="card">Python Certificate</div>
+        <div class="card">Web Development Certificate</div>
     </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="reveal">
     <h2>Contact</h2>
-    <div class="card">
-        Email: your@email.com
-    </div>
+    <div class="card">your@email.com</div>
 </section>
 
 <footer>
@@ -212,16 +227,37 @@ footer{
 </footer>
 
 <script>
+// DARK MODE
 function toggleMode(){
     document.body.classList.toggle("light");
     localStorage.setItem("mode", document.body.classList.contains("light"));
 }
-
 window.onload = () => {
-    if(localStorage.getItem("mode") === "true"){
+    if(localStorage.getItem("mode")==="true"){
         document.body.classList.add("light");
     }
-}
+};
+
+// SCROLL ANIMATION
+const reveals=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>{
+    reveals.forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight-100){
+            el.classList.add("active");
+        }
+    });
+});
+
+// 3D CARD EFFECT
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("mousemove",(e)=>{
+        let x=e.offsetX, y=e.offsetY;
+        card.style.transform=`rotateX(${-(y/10)}deg) rotateY(${x/10}deg) scale(1.05)`;
+    });
+    card.addEventListener("mouseleave",()=>{
+        card.style.transform="rotateX(0) rotateY(0)";
+    });
+});
 </script>
 
 </body>
