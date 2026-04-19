@@ -152,12 +152,12 @@ section{
     gap:20px;
 }
 
-/* CURSOR GLOW */
+/* 🟣 SMALL PURPLE CURSOR GLOW */
 .cursor-glow{
     position:fixed;
-    width:80px;
-    height:80px;
-    background: radial-gradient(circle, rgba(56,189,248,0.4), transparent);
+    width:40px;
+    height:40px;
+    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
     border-radius:50%;
     pointer-events:none;
     transform:translate(-50%, -50%);
@@ -267,14 +267,23 @@ window.onload = () => {
     }
 };
 
-// CURSOR GLOW
-const glow=document.querySelector(".cursor-glow");
-document.addEventListener("mousemove",(e)=>{
-    glow.style.left=e.clientX+"px";
-    glow.style.top=e.clientY+"px";
+// 🟣 SMOOTH CURSOR
+const glow = document.querySelector(".cursor-glow");
+let x = 0, y = 0;
+
+document.addEventListener("mousemove", (e) => {
+    x = e.clientX;
+    y = e.clientY;
 });
 
-// MAGNETIC BUTTON
+function animate(){
+    glow.style.left = x + "px";
+    glow.style.top = y + "px";
+    requestAnimationFrame(animate);
+}
+animate();
+
+// 🧲 MAGNETIC BUTTON
 document.querySelectorAll(".magnet").forEach(btn=>{
     btn.addEventListener("mousemove",(e)=>{
         const rect=btn.getBoundingClientRect();
@@ -282,7 +291,6 @@ document.querySelectorAll(".magnet").forEach(btn=>{
         const y=e.clientY - rect.top - rect.height/2;
         btn.style.transform=`translate(${x*0.2}px, ${y*0.2}px)`;
     });
-
     btn.addEventListener("mouseleave",()=>{
         btn.style.transform="translate(0,0)";
     });
