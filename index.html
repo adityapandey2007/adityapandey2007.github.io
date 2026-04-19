@@ -5,12 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aditya Pandey Portfolio</title>
 
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #0f172a, #020617);
     color: white;
+    scroll-behavior: smooth;
 }
 
 /* Navbar */
@@ -18,7 +22,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     position: sticky;
     top: 0;
 }
@@ -26,6 +30,9 @@ nav a {
     color: white;
     margin: 0 10px;
     text-decoration: none;
+}
+nav a.active {
+    color: #38bdf8;
 }
 
 /* Hero */
@@ -37,13 +44,7 @@ header {
 header img {
     width: 120px;
     border-radius: 50%;
-    margin-bottom: 15px;
     border: 3px solid #38bdf8;
-}
-
-header h1 {
-    font-size: 40px;
-    color: #38bdf8;
 }
 
 .typing {
@@ -66,7 +67,7 @@ header h1 {
 /* Sections */
 section {
     padding: 60px 20px;
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
 }
 
@@ -78,13 +79,19 @@ h2 {
 .card {
     background: #1e293b;
     padding: 20px;
-    margin: 10px 0;
+    margin: 15px 0;
     border-radius: 12px;
     transition: 0.3s;
 }
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     background: #334155;
+}
+
+/* Project images */
+.project-img {
+    width: 100%;
+    border-radius: 10px;
 }
 
 /* Buttons */
@@ -98,16 +105,36 @@ h2 {
     margin-top: 10px;
 }
 
+/* Social icons */
+.social {
+    margin-top: 20px;
+}
+.social i {
+    font-size: 22px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.social i:hover {
+    color: #38bdf8;
+}
+
+/* Scroll animation */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s;
+}
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
     background: #020617;
-}
-
-/* Mobile */
-@media(max-width:600px){
-    header h1 { font-size: 28px; }
 }
 </style>
 </head>
@@ -125,27 +152,30 @@ footer {
 </nav>
 
 <header>
-    <!-- 👤 Profile Photo -->
-    <img src="https://via.placeholder.com/120" alt="Profile Photo">
-
+    <img src="https://via.placeholder.com/120">
     <h1>Hi, I'm Aditya 👋</h1>
-
-    <!-- 🎬 Typing Animation -->
     <p class="typing">CSE AI/ML Student | Developer 🚀</p>
 
     <br>
-    <!-- 📄 Resume Button -->
     <a href="#" class="btn">Download Resume</a>
+
+    <!-- Social Icons -->
+    <div class="social">
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-github"></i>
+        <i class="fas fa-envelope"></i>
+    </div>
 </header>
 
-<section id="about">
+<section id="about" class="hidden">
     <h2>About Me</h2>
     <div class="card">
         <p>I am a passionate CSE (AI/ML) student who loves building smart systems and modern web applications.</p>
     </div>
 </section>
 
-<section id="skills">
+<section id="skills" class="hidden">
     <h2>Skills</h2>
     <div class="card">Python</div>
     <div class="card">C Programming</div>
@@ -153,20 +183,21 @@ footer {
     <div class="card">SQL</div>
 </section>
 
-<section id="projects">
+<section id="projects" class="hidden">
     <h2>Projects</h2>
+
     <div class="card">
-        <h3>Smart Gesture Light & Fan Control</h3>
-        <p>Control home appliances using gesture-based automation system.</p>
+        <img src="https://via.placeholder.com/600x300" class="project-img">
+        <h3>Smart Gesture Light Control</h3>
+        <p>Control devices using gestures with automation system.</p>
     </div>
+
 </section>
 
-<section id="contact">
+<section id="contact" class="hidden">
     <h2>Contact</h2>
     <div class="card">
         <p>Email: your@email.com</p>
-        <p>LinkedIn: your-link</p>
-        <p>GitHub: your-link</p>
     </div>
 </section>
 
@@ -174,6 +205,42 @@ footer {
     <p>© 2026 Aditya Pandey</p>
 </footer>
 
+<script>
+// Scroll animation
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+
+// Navbar active link
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.onscroll = () => {
+    let current = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if(pageYOffset >= sectionTop){
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(a => {
+        a.classList.remove("active");
+        if(a.getAttribute("href") === "#" + current){
+            a.classList.add("active");
+        }
+    });
+};
+</script>
+
 </body>
 </html>
 
+   
