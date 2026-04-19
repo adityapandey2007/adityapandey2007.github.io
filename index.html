@@ -1,24 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Aditya Pandey</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Pandey Portfolio</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: #020617;
+    position: sticky;
+    top: 0;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+/* Hero */
+header {
+    text-align: center;
+    padding: 80px 20px;
+}
+header h1 {
+    font-size: 40px;
+    color: #38bdf8;
+}
+header p {
+    font-size: 18px;
+}
+
+/* Sections */
+section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h2 {
+    color: #38bdf8;
+}
+
+/* Cards */
+.card {
+    background: #1e293b;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.card:hover {
+    transform: scale(1.05);
+    background: #334155;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #38bdf8;
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #020617;
+}
+</style>
 </head>
-<body style="text-align:center; font-family:Arial;">
 
-    <h1>Hello, I'm Aditya 👋</h1>
-    <p>BTech CSE (AI/ML) Student</p>
+<body>
 
+<nav>
+    <h3>Aditya</h3>
+    <div>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Hi, I'm Aditya 👋</h1>
+    <p>BTech CSE (AI/ML) Student | Future Developer 🚀</p>
+    <a href="#contact" class="btn">Contact Me</a>
+</header>
+
+<section id="about">
     <h2>About Me</h2>
-    <p>I am passionate about programming and AI.</p>
+    <div class="card">
+        <p>I am a passionate CSE (AI/ML) student who loves building smart systems and websites. I enjoy learning new technologies and solving real-world problems.</p>
+    </div>
+</section>
 
+<section id="skills">
     <h2>Skills</h2>
-    <p>Python | C | HTML</p>
+    <div class="card">Python</div>
+    <div class="card">C Programming</div>
+    <div class="card">HTML & CSS</div>
+    <div class="card">SQL</div>
+</section>
 
+<section id="projects">
     <h2>Projects</h2>
-    <p>Smart Gesture Light & Fan Control System</p>
+    <div class="card">
+        <h3>Smart Gesture Light & Fan Control</h3>
+        <p>Control home appliances using hand gestures with sensors and automation.</p>
+    </div>
+</section>
 
+<section id="contact">
     <h2>Contact</h2>
-    <p>Email: your@email.com</p>
+    <div class="card">
+        <p>Email: your@email.com</p>
+        <p>LinkedIn: add-your-link</p>
+        <p>GitHub: add-your-link</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Aditya Pandey | Portfolio</p>
+</footer>
 
 </body>
 </html>
