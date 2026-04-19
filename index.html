@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aditya Pandey Portfolio</title>
 
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -17,12 +16,22 @@ body {
     scroll-behavior: smooth;
 }
 
+/* Smooth fade-in page */
+body {
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 /* Navbar */
 nav {
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
 }
@@ -75,23 +84,18 @@ h2 {
     color: #38bdf8;
 }
 
-/* Cards */
+/* Glass Cards */
 .card {
-    background: #1e293b;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
     padding: 20px;
     margin: 15px 0;
-    border-radius: 12px;
+    border-radius: 15px;
     transition: 0.3s;
 }
 .card:hover {
     transform: translateY(-8px);
-    background: #334155;
-}
-
-/* Project images */
-.project-img {
-    width: 100%;
-    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
 }
 
 /* Buttons */
@@ -105,14 +109,16 @@ h2 {
     margin-top: 10px;
 }
 
-/* Social icons */
+/* Social */
 .social {
     margin-top: 20px;
+}
+.social a {
+    color: white;
 }
 .social i {
     font-size: 22px;
     margin: 0 10px;
-    cursor: pointer;
     transition: 0.3s;
 }
 .social i:hover {
@@ -136,6 +142,11 @@ footer {
     padding: 20px;
     background: #020617;
 }
+
+/* Mobile */
+@media(max-width:600px){
+    header h1 { font-size: 28px; }
+}
 </style>
 </head>
 
@@ -156,22 +167,20 @@ footer {
     <h1>Hi, I'm Aditya 👋</h1>
     <p class="typing">CSE AI/ML Student | Developer 🚀</p>
 
-    <br>
     <a href="#" class="btn">Download Resume</a>
 
-    <!-- Social Icons -->
     <div class="social">
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-github"></i>
-        <i class="fas fa-envelope"></i>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
     </div>
 </header>
 
 <section id="about" class="hidden">
     <h2>About Me</h2>
     <div class="card">
-        <p>I am a passionate CSE (AI/ML) student who loves building smart systems and modern web applications.</p>
+        <p>I am a passionate CSE (AI/ML) student focused on building smart and scalable tech solutions.</p>
     </div>
 </section>
 
@@ -187,9 +196,13 @@ footer {
     <h2>Projects</h2>
 
     <div class="card">
-        <img src="https://via.placeholder.com/600x300" class="project-img">
         <h3>Smart Gesture Light Control</h3>
-        <p>Control devices using gestures with automation system.</p>
+        <p>Gesture-based automation system for controlling appliances.</p>
+    </div>
+
+    <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>Personal portfolio hosted using GitHub Pages.</p>
     </div>
 
 </section>
@@ -214,16 +227,14 @@ const observer = new IntersectionObserver(entries => {
         }
     });
 });
-
 document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
 
-// Navbar active link
+// Navbar highlight
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
 window.onscroll = () => {
     let current = "";
-
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
         if(pageYOffset >= sectionTop){
@@ -242,5 +253,3 @@ window.onscroll = () => {
 
 </body>
 </html>
-
-   
