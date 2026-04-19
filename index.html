@@ -26,10 +26,9 @@ body {
     background:var(--bg);
     color:var(--text);
     scroll-behavior:smooth;
-    transition:0.3s;
 }
 
-/* 🌊 Animated BG */
+/* 🌊 Animated Background */
 body::before{
     content:"";
     position:fixed;
@@ -44,7 +43,7 @@ body::before{
     to{transform:translate(-150px,-150px);}
 }
 
-/* NAV */
+/* NAVBAR */
 nav{
     display:flex;
     justify-content:space-between;
@@ -61,26 +60,42 @@ nav .links a{
 }
 
 /* HERO */
-header{
-    text-align:center;
-    padding:120px 20px;
+#hero {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:120px 50px;
+    flex-wrap:wrap;
 }
 
-header img{
-    width:140px;
-    border-radius:50%;
+.hero-text h1{
+    font-size:50px;
 }
 
 .gradient-text{
-    font-size:50px;
     background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
     background-size:200%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:shine 4s linear infinite;
 }
+
 @keyframes shine{
     to{background-position:200%;}
+}
+
+.hero-img img{
+    width:320px;
+    transition:transform 0.2s ease;
+}
+
+/* BUTTON */
+.btn{
+    background:linear-gradient(45deg,#38bdf8,#6366f1);
+    padding:12px 25px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
 }
 
 /* SECTIONS */
@@ -100,24 +115,15 @@ section{
     transition:.3s;
 }
 
+.card:hover{
+    transform:scale(1.05);
+}
+
 /* GRID */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
-}
-
-/* BUTTON */
-.btn{
-    background:linear-gradient(45deg,#38bdf8,#6366f1);
-    padding:12px 25px;
-    border-radius:6px;
-    color:white;
-    text-decoration:none;
-    transition:0.3s;
-}
-.btn:hover{
-    box-shadow:0 0 20px #38bdf8;
 }
 
 /* SOCIAL */
@@ -126,7 +132,7 @@ section{
     font-size:22px;
 }
 
-/* REVEAL */
+/* SCROLL ANIMATION */
 .reveal{
     opacity:0;
     transform:translateY(60px);
@@ -135,19 +141,6 @@ section{
 .reveal.active{
     opacity:1;
     transform:translateY(0);
-}
-
-/* TITLE ANIMATION */
-h2::after{
-    content:"";
-    display:block;
-    width:0%;
-    height:3px;
-    background:#38bdf8;
-    transition:0.5s;
-}
-h2:hover::after{
-    width:100%;
 }
 
 /* FOOTER */
@@ -172,17 +165,23 @@ footer{
     </div>
 </nav>
 
-<header>
-    <img src="https://via.placeholder.com/140">
-    <h1 class="gradient-text">Aditya Pandey</h1>
-    <p>CSE AI/ML Student 🚀</p>
-    <a href="#" class="btn">Download Resume</a>
+<!-- HERO WITH INTERACTIVE AVATAR -->
+<header id="hero">
+    <div class="hero-text">
+        <h1 class="gradient-text">Aditya Pandey</h1>
+        <p>CSE AI/ML Student 🚀</p>
+        <a href="#" class="btn">Download Resume</a>
 
-    <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
+        <div class="social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <div class="hero-img">
+        <img src="https://i.imgur.com/6VBx3io.png" id="avatar">
     </div>
 </header>
 
@@ -248,15 +247,13 @@ window.addEventListener("scroll",()=>{
     });
 });
 
-// 3D CARD EFFECT
-document.querySelectorAll(".card").forEach(card=>{
-    card.addEventListener("mousemove",(e)=>{
-        let x=e.offsetX, y=e.offsetY;
-        card.style.transform=`rotateX(${-(y/10)}deg) rotateY(${x/10}deg) scale(1.05)`;
-    });
-    card.addEventListener("mouseleave",()=>{
-        card.style.transform="rotateX(0) rotateY(0)";
-    });
+// AVATAR INTERACTION
+const avatar = document.getElementById("avatar");
+document.addEventListener("mousemove", (e) => {
+    let x = (window.innerWidth / 2 - e.clientX) / 25;
+    let y = (window.innerHeight / 2 - e.clientY) / 25;
+
+    avatar.style.transform = `rotateY(${x}deg) rotateX(${y}deg) scale(1.05)`;
 });
 </script>
 
