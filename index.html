@@ -25,10 +25,9 @@ body{
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
-    transition:0.3s;
 }
 
-/* 🌊 Animated BG */
+/* 🌊 BG */
 body::before{
     content:"";
     position:fixed;
@@ -59,40 +58,16 @@ nav a{
     text-decoration:none;
 }
 
-.mode-btn{
-    cursor:pointer;
-}
-
 /* HERO */
 #hero{
     text-align:center;
     padding:120px 20px;
 }
 
-/* PROFILE */
-.profile-container{
-    display:flex;
-    justify-content:center;
-    margin-bottom:30px;
-}
-
 .profile-pic{
     width:220px;
     height:260px;
-    object-fit:cover;
     border-radius:20px;
-
-    border:2px solid rgba(255,255,255,0.2);
-
-    box-shadow:
-        0 0 25px rgba(56,189,248,0.5),
-        0 0 60px rgba(99,102,241,0.3);
-
-    transition:0.4s;
-}
-
-.profile-pic:hover{
-    transform:scale(1.08) rotateY(8deg);
 }
 
 /* TEXT */
@@ -104,13 +79,9 @@ nav a{
     -webkit-text-fill-color:transparent;
     animation:shine 4s linear infinite;
 }
-@keyframes shine{
-    to{background-position:200%;}
-}
 
 /* BUTTON */
 .btn{
-    display:inline-block;
     padding:12px 25px;
     background:linear-gradient(45deg,#38bdf8,#6366f1);
     border-radius:6px;
@@ -122,11 +93,6 @@ nav a{
 .social i{
     margin:10px;
     font-size:22px;
-    transition:0.3s;
-}
-.social i:hover{
-    color:#38bdf8;
-    transform:scale(1.2);
 }
 
 /* SECTIONS */
@@ -136,13 +102,13 @@ section{
     margin:auto;
 }
 
-/* CARDS */
+/* CARD */
 .card{
     background:var(--card);
-    backdrop-filter:blur(15px);
     padding:25px;
     border-radius:15px;
     margin:20px 0;
+    cursor:pointer;
 }
 
 /* GRID */
@@ -152,7 +118,7 @@ section{
     gap:20px;
 }
 
-/* 🟣 SMALL PURPLE CURSOR GLOW */
+/* CURSOR */
 .cursor-glow{
     position:fixed;
     width:40px;
@@ -160,11 +126,9 @@ section{
     background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
     border-radius:50%;
     pointer-events:none;
-    transform:translate(-50%, -50%);
-    z-index:9999;
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 .reveal{
     opacity:0;
     transform:translateY(60px);
@@ -174,11 +138,6 @@ section{
     opacity:1;
     transform:translateY(0);
 }
-
-footer{
-    text-align:center;
-    padding:20px;
-}
 </style>
 </head>
 
@@ -187,141 +146,121 @@ footer{
 <div class="cursor-glow"></div>
 
 <nav>
-    <h2>Aditya</h2>
-    <div>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certificates</a>
-        <a href="#contact">Contact</a>
-        <span class="mode-btn" onclick="toggleMode()">🌓</span>
-    </div>
+<h2>Aditya</h2>
+<div>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#certifications">Certificates</a>
+<a href="#contact">Contact</a>
+<span onclick="toggleMode()">🌓</span>
+</div>
 </nav>
 
 <header id="hero">
-    <div class="profile-container">
-        <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
-    </div>
+<img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 
-    <h1 class="gradient-text">Aditya Pandey</h1>
-    <p>CSE AI/ML Student 🚀</p>
+<h1 class="gradient-text">Aditya Pandey</h1>
+<p>CSE AI/ML Student 🚀</p>
 
-    <a href="#" class="btn magnet">Download Resume</a>
+<a href="#" class="btn magnet">Download Resume</a>
 
-    <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
-    </div>
+<div class="social">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-linkedin"></i></a>
+<a href="#"><i class="fab fa-github"></i></a>
+<a href="#"><i class="fas fa-envelope"></i></a>
+</div>
 </header>
 
 <section id="about" class="reveal">
-    <h2>About</h2>
-    <div class="card"> I am a passionate and dedicated B.Tech student specializing in Computer Science and Engineering with a focus on Artificial Intelligence and Machine Learning at Lovely Professional University. As a first-year student, I am building a strong foundation in programming, problem-solving, and core computer science concepts.
-
-I have a keen interest in emerging technologies such as AI, automation, and smart systems. I enjoy exploring how technology can be used to solve real-world problems and improve everyday life. I am continuously learning and enhancing my skills in languages like Python and gaining hands-on experience through academic projects and personal practice.
-
-I am highly motivated, adaptable, and always eager to learn new tools and technologies. My goal is to grow as a skilled software developer and AI engineer, contributing to innovative and impactful projects in the future.
-
-Apart from academics, I am actively working on developing my portfolio and improving my technical and communication skills to prepare myself for industry challenges.</div>
+<h2>About</h2>
+<div class="card">
+Passionate AI/ML student building real-world projects and improving continuously.
+</div>
 </section>
 
 <section id="skills" class="reveal">
-    <h2>Skills</h2>
-    <div class="grid">
-        <div class="card">Python Language</div>
-        <div class="card">C Language</div>
-        <div class="card">HTML | CSS | JavaScript</div>
-    </div>
+<h2>Skills</h2>
+<div class="grid">
+<div class="card">Python</div>
+<div class="card">C</div>
+<div class="card">HTML | CSS | JS</div>
+</div>
 </section>
 
 <section id="projects" class="reveal">
-    <h2>Projects</h2>
-    <div class="grid">
-        <div class="card">Gesture Control System</div>
-        <div class="card">Portfolio Website</div>
-    </div>
+<h2>Projects</h2>
+<div class="grid">
+<div class="card">Gesture Control System</div>
+<div class="card">Portfolio Website</div>
+</div>
 </section>
 
+<!-- 🔥 UPDATED CERTIFICATES -->
 <section id="certifications" class="reveal">
-    <h2>Certificates</h2>
-    <div class="grid">
-        <div class="card">Python Certificate</div>
-    </div>
+<h2>Certificates</h2>
+<div class="grid">
+
+<a href="YOUR_PYTHON_CERTIFICATE_LINK" target="_blank">
+<div class="card">🐍 Python Certificate</div>
+</a>
+
+<a href="YOUR_AI_CERTIFICATE_LINK" target="_blank">
+<div class="card">🤖 AI & ML Certificate</div>
+</a>
+
+<a href="YOUR_HACKATHON_CERTIFICATE_LINK" target="_blank">
+<div class="card">🏆 Hackathon Certificate</div>
+</a>
+
+</div>
 </section>
 
+<!-- 🔥 UPDATED CONTACT -->
 <section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <div class="card">your@email.com</div>
+<h2>Contact</h2>
+<div class="card">
+📧 Email: your@email.com <br><br>
+📍 Location: Your City, India <br><br>
+📱 Mobile: +91 XXXXX XXXXX
+</div>
 </section>
 
 <footer>
-    © 2026 Aditya Pandey
+© 2026 Aditya Pandey
 </footer>
 
 <script>
-// 🌙 MODE
+// MODE
 function toggleMode(){
-    document.body.classList.toggle("light");
-    localStorage.setItem("mode", document.body.classList.contains("light"));
+document.body.classList.toggle("light");
 }
 
-window.onload = () => {
-    if(localStorage.getItem("mode")==="true"){
-        document.body.classList.add("light");
-    }
-};
-
-// 🟣 SMOOTH CURSOR
-const glow = document.querySelector(".cursor-glow");
-let x = 0, y = 0;
-
-document.addEventListener("mousemove", (e) => {
-    x = e.clientX;
-    y = e.clientY;
+// CURSOR
+const glow=document.querySelector(".cursor-glow");
+document.addEventListener("mousemove",(e)=>{
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
 });
 
-function animate(){
-    glow.style.left = x + "px";
-    glow.style.top = y + "px";
-    requestAnimationFrame(animate);
-}
-animate();
-
-// 🧲 MAGNETIC BUTTON
-document.querySelectorAll(".magnet").forEach(btn=>{
-    btn.addEventListener("mousemove",(e)=>{
-        const rect=btn.getBoundingClientRect();
-        const x=e.clientX - rect.left - rect.width/2;
-        const y=e.clientY - rect.top - rect.height/2;
-        btn.style.transform=`translate(${x*0.2}px, ${y*0.2}px)`;
-    });
-    btn.addEventListener("mouseleave",()=>{
-        btn.style.transform="translate(0,0)";
-    });
-});
-
-// SMOOTH SCROLL
+// SCROLL
 document.querySelectorAll("nav a").forEach(link=>{
-    link.addEventListener("click",(e)=>{
-        e.preventDefault();
-        const target=document.querySelector(link.getAttribute("href"));
-        window.scrollTo({
-            top:target.offsetTop-80,
-            behavior:"smooth"
-        });
-    });
+link.addEventListener("click",(e)=>{
+e.preventDefault();
+const target=document.querySelector(link.getAttribute("href"));
+window.scrollTo({top:target.offsetTop-80,behavior:"smooth"});
+});
 });
 
-// SCROLL ANIMATION
+// REVEAL
 const reveals=document.querySelectorAll(".reveal");
 window.addEventListener("scroll",()=>{
-    reveals.forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight-100){
-            el.classList.add("active");
-        }
-    });
+reveals.forEach(el=>{
+if(el.getBoundingClientRect().top < window.innerHeight-100){
+el.classList.add("active");
+}
+});
 });
 </script>
 
