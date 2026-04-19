@@ -10,11 +10,10 @@
 <style>
 :root {
     --bg:#0f172a;
-    --text:#ffffff;
+    --text:#fff;
     --card:rgba(255,255,255,0.08);
 }
 
-/* 🌞 LIGHT MODE */
 .light {
     --bg:#f8fafc;
     --text:#0f172a;
@@ -26,22 +25,14 @@ body{
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
-    transition:0.3s;
 }
 
-/* 🌊 Animated BG */
-body::before{
-    content:"";
+/* PARTICLE BACKGROUND */
+#particles-js{
     position:fixed;
-    width:200%;
-    height:200%;
-    background: radial-gradient(circle,#38bdf8,transparent),
-                radial-gradient(circle,#6366f1,transparent);
-    animation: move 12s infinite alternate;
+    width:100%;
+    height:100%;
     z-index:-1;
-}
-@keyframes move{
-    to{transform:translate(-150px,-150px);}
 }
 
 /* NAV */
@@ -49,20 +40,7 @@ nav{
     display:flex;
     justify-content:space-between;
     padding:20px 50px;
-    position:sticky;
-    top:0;
     backdrop-filter:blur(10px);
-}
-
-nav a{
-    margin:0 10px;
-    color:var(--text);
-    text-decoration:none;
-}
-
-.mode-btn{
-    cursor:pointer;
-    margin-left:15px;
 }
 
 /* HERO */
@@ -72,239 +50,154 @@ nav a{
 }
 
 /* PROFILE */
-.profile-container{
-    display:flex;
-    justify-content:center;
-    margin-bottom:30px;
-}
-
 .profile-pic{
     width:220px;
     height:260px;
-    object-fit:cover;
     border-radius:20px;
-    border:2px solid rgba(255,255,255,0.2);
-
-    box-shadow:
-        0 0 25px rgba(56,189,248,0.5),
-        0 0 60px rgba(99,102,241,0.3);
-
-    transition:0.4s;
 }
 
-.profile-pic:hover{
-    transform:scale(1.08) rotateY(8deg);
+/* TYPING */
+.typing{
+    border-right:2px solid;
+    white-space:nowrap;
+    overflow:hidden;
+    display:inline-block;
+    animation: typing 3s steps(30), blink .7s infinite;
 }
-
-/* TEXT */
-.gradient-text{
-    font-size:50px;
-    background:linear-gradient(90deg,#38bdf8,#6366f1,#38bdf8);
-    background-size:200%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:shine 4s linear infinite;
-}
-
-@keyframes shine{
-    to{background-position:200%;}
-}
+@keyframes typing{from{width:0}to{width:250px}}
+@keyframes blink{50%{border-color:transparent}}
 
 /* BUTTON */
 .btn{
-    display:inline-block;
-    padding:12px 25px;
+    padding:10px 20px;
     background:linear-gradient(45deg,#38bdf8,#6366f1);
     border-radius:6px;
     color:white;
     text-decoration:none;
 }
 
-/* SOCIAL */
-.social i{
-    margin:10px;
-    font-size:22px;
-}
-
-/* SECTIONS */
-section{
-    padding:100px 50px;
-    max-width:1200px;
-    margin:auto;
-}
-
-/* CARDS */
-.card{
-    background:var(--card);
-    backdrop-filter:blur(15px);
-    padding:25px;
-    border-radius:15px;
-    margin:20px 0;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-/* CURSOR GLOW */
+/* SMALL CURSOR GLOW */
 .cursor-glow{
     position:fixed;
-    width:120px;
-    height:120px;
-    background: radial-gradient(circle, rgba(56,189,248,0.4), transparent);
+    width:50px;
+    height:50px;
+    background: radial-gradient(circle, rgba(255,0,150,0.5), transparent);
     border-radius:50%;
     pointer-events:none;
-    transform:translate(-50%, -50%);
+    transform:translate(-50%,-50%);
     z-index:9999;
 }
 
-/* SCROLL ANIMATION */
-.reveal{
-    opacity:0;
-    transform:translateY(60px);
+/* SKILL BAR */
+.skill{
+    margin:15px 0;
+}
+.bar{
+    height:10px;
+    background:#333;
+    border-radius:5px;
+}
+.fill{
+    height:10px;
+    background:#38bdf8;
+    width:0;
+    border-radius:5px;
     transition:1s;
 }
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
 
-footer{
-    text-align:center;
-    padding:20px;
+/* CHATBOT */
+.chatbot{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+}
+.chatbox{
+    display:none;
+    width:250px;
+    background:#111;
+    padding:10px;
 }
 </style>
 </head>
 
 <body>
 
+<div id="particles-js"></div>
 <div class="cursor-glow"></div>
 
 <nav>
-    <h2>Aditya</h2>
-    <div>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certificates</a>
-        <a href="#contact">Contact</a>
-        <span class="mode-btn" onclick="toggleMode()">🌓</span>
-    </div>
+<h2>Aditya</h2>
+<span onclick="toggleMode()">🌓</span>
 </nav>
 
 <header id="hero">
-    <div class="profile-container">
-        <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
-    </div>
+<img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 
-    <h1 class="gradient-text">Aditya Pandey</h1>
-    <p>CSE AI/ML Student 🚀</p>
+<h1>Aditya Pandey</h1>
+<p class="typing">AI/ML Student | Developer 🚀</p>
 
-    <a href="#" class="btn magnet">Download Resume</a>
-
-    <div class="social">
-        <a href="https://www.instagram.com/adityaaah4uall?igsh=NXF0YW00djdxNXoz"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/aditya-pandey-a33798379?utm_source=share_via&utm_content=profile&utm_medium=member_android"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/adityapandey2007
-"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
-    </div>
+<br>
+<a href="#" class="btn">Resume</a>
 </header>
 
-<section id="about" class="reveal">
-    <h2>About</h2>
-    <div class="card">Passionate developer building AI solutions.</div>
+<section>
+<h2>Skills</h2>
+
+<div class="skill">
+Python
+<div class="bar"><div class="fill" style="width:80%"></div></div>
+</div>
+
+<div class="skill">
+HTML
+<div class="bar"><div class="fill" style="width:70%"></div></div>
+</div>
+
 </section>
 
-<section id="skills" class="reveal">
-    <h2>Skills</h2>
-    <div class="grid">
-        <div class="card">Python</div>
-        <div class="card">C</div>
-        <div class="card">HTML CSS</div>
-    </div>
-</section>
+<!-- CHATBOT -->
+<div class="chatbot">
+<button onclick="toggleChat()">💬</button>
+<div class="chatbox" id="chatbox">
+<p>Hi 👋 Ask me anything!</p>
+</div>
+</div>
 
-<section id="projects" class="reveal">
-    <h2>Projects</h2>
-    <div class="grid">
-        <div class="card">Gesture Control System</div>
-        <div class="card">Portfolio Website</div>
-    </div>
-</section>
-
-<section id="certifications" class="reveal">
-    <h2>Certificates</h2>
-    <div class="grid">
-        <div class="card">Python Certificate</div>
-    </div>
-</section>
-
-<section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <div class="card">your@email.com</div>
-</section>
-
-<footer>
-    © 2026 Aditya Pandey
-</footer>
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
-// 🌙 DAY/NIGHT MODE
+// DARK MODE
 function toggleMode(){
     document.body.classList.toggle("light");
-    localStorage.setItem("mode", document.body.classList.contains("light"));
 }
 
-window.onload = () => {
-    if(localStorage.getItem("mode")==="true"){
-        document.body.classList.add("light");
-    }
-};
-
-// CURSOR GLOW
+// CURSOR
 const glow=document.querySelector(".cursor-glow");
 document.addEventListener("mousemove",(e)=>{
     glow.style.left=e.clientX+"px";
     glow.style.top=e.clientY+"px";
 });
 
-// MAGNETIC BUTTON
-document.querySelectorAll(".magnet").forEach(btn=>{
-    btn.addEventListener("mousemove",(e)=>{
-        const rect=btn.getBoundingClientRect();
-        const x=e.clientX - rect.left - rect.width/2;
-        const y=e.clientY - rect.top - rect.height/2;
-        btn.style.transform=`translate(${x*0.2}px, ${y*0.2}px)`;
+// SKILL ANIMATION
+window.onload=()=>{
+    document.querySelectorAll(".fill").forEach(el=>{
+        el.style.width=el.style.width;
     });
-    btn.addEventListener("mouseleave",()=>{
-        btn.style.transform="translate(0,0)";
-    });
-});
+};
 
-// SMOOTH SCROLL
-document.querySelectorAll("nav a").forEach(link=>{
-    link.addEventListener("click",(e)=>{
-        e.preventDefault();
-        const target=document.querySelector(link.getAttribute("href"));
-        window.scrollTo({
-            top:target.offsetTop-80,
-            behavior:"smooth"
-        });
-    });
-});
+// CHATBOT
+function toggleChat(){
+    const box=document.getElementById("chatbox");
+    box.style.display = box.style.display==="block" ? "none" : "block";
+}
 
-// SCROLL ANIMATION
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-    reveals.forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight-100){
-            el.classList.add("active");
-        }
-    });
+// PARTICLES
+particlesJS("particles-js",{
+  particles:{
+    number:{value:60},
+    size:{value:3},
+    move:{speed:2}
+  }
 });
 </script>
 
