@@ -14,7 +14,6 @@
     --card:rgba(255,255,255,0.08);
 }
 
-/* LIGHT MODE */
 .light {
     --bg:#f8fafc;
     --text:#0f172a;
@@ -26,10 +25,9 @@ body{
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
-    overflow-x:hidden;
 }
 
-/* 🌊 PARALLAX BG */
+/* 🌊 BG */
 body::before{
     content:"";
     position:fixed;
@@ -37,21 +35,18 @@ body::before{
     height:200%;
     background: radial-gradient(circle,#38bdf8,transparent),
                 radial-gradient(circle,#6366f1,transparent);
+    animation: move 12s infinite alternate;
     z-index:-1;
-    transition:transform 0.2s;
 }
 
-/* NAVBAR GLASS */
+/* NAV */
 nav{
     display:flex;
     justify-content:space-between;
     padding:20px 50px;
-    position:fixed;
-    width:100%;
+    position:sticky;
     top:0;
-    backdrop-filter:blur(15px);
-    background:rgba(0,0,0,0.3);
-    z-index:1000;
+    backdrop-filter:blur(10px);
 }
 
 nav a{
@@ -62,34 +57,42 @@ nav a{
 
 /* HERO */
 #hero{
-    padding-top:140px;
     text-align:center;
+    padding:120px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 /* PROFILE */
 .profile-wrapper{
-    display:inline-block;
     padding:12px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
+    margin-bottom:20px;
 
-    animation:float 4s infinite ease-in-out, glow 3s infinite;
+    animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
 }
 
 .profile-pic{
     width:200px;
+    height:auto;
     border-radius:16px;
 }
 
 /* FLOAT */
 @keyframes float{
+    0%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
 }
 
 /* GLOW */
-@keyframes glow{
+@keyframes glowPulse{
+    0%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
     50%{box-shadow:0 0 30px rgba(168,85,247,0.6);}
+    100%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
 }
 
 /* TEXT */
@@ -99,26 +102,38 @@ nav a{
     background-size:300%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:shine 5s infinite linear;
+    animation:shine 5s linear infinite;
 }
+
 @keyframes shine{
-    to{background-position:300%;}
+    0%{background-position:0%}
+    100%{background-position:300%}
 }
 
 /* BUTTON */
 .btn{
-    margin:20px 0;
     padding:12px 25px;
     background:linear-gradient(45deg,#38bdf8,#6366f1);
     border-radius:6px;
     color:white;
     text-decoration:none;
+    margin:20px 0;
 }
 
 /* SOCIAL */
 .social i{
     margin:10px;
     font-size:22px;
+}
+
+/* CURSOR */
+.cursor-glow{
+    position:fixed;
+    width:40px;
+    height:40px;
+    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
+    border-radius:50%;
+    pointer-events:none;
 }
 
 /* SECTIONS */
@@ -133,34 +148,24 @@ section{
     background:var(--card);
     padding:25px;
     border-radius:15px;
+    margin:20px 0;
 }
 
 /* GRID */
 .grid{
     display:grid;
-    gap:20px;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-/* CURSOR */
-.cursor-glow{
-    position:fixed;
-    width:40px;
-    height:40px;
-    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
-    border-radius:50%;
-    pointer-events:none;
+/* TYPING */
+#typing::after{
+    content:"|";
+    animation:blink 1s infinite;
 }
 
-/* REVEAL */
-.reveal{
-    opacity:0;
-    transform:translateY(50px);
-    transition:1s;
-}
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
+@keyframes blink{
+    50%{opacity:0;}
 }
 </style>
 </head>
@@ -182,63 +187,61 @@ section{
 </nav>
 
 <header id="hero">
-<div class="profile-wrapper">
+
+<div class="profile-wrapper" id="profile">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 </div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
+
 <p id="typing"></p>
 <p id="roles"></p>
 
 <a href="#" class="btn">Download Resume</a>
 
 <div class="social">
-<i class="fab fa-instagram"></i>
-<i class="fab fa-linkedin"></i>
-<i class="fab fa-github"></i>
-<i class="fas fa-envelope"></i>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-linkedin"></i></a>
+<a href="#"><i class="fab fa-github"></i></a>
+<a href="#"><i class="fas fa-envelope"></i></a>
 </div>
+
 </header>
 
-<section id="about" class="reveal">
-<h2>About</h2>
-<div class="card">AI/ML student building real-world solutions.</div>
-</section>
+<section id="about"><h2>About</h2><div class="card">AI/ML student passionate about building real-world solutions.</div></section>
 
-<section id="skills" class="reveal">
-<h2>Skills</h2>
+<section id="skills"><h2>Skills</h2>
 <div class="grid">
 <div class="card">Python</div>
 <div class="card">C</div>
-<div class="card">Web Dev</div>
+<div class="card">Web Development</div>
 </div>
 </section>
 
-<section id="projects" class="reveal">
-<h2>Projects</h2>
+<section id="projects"><h2>Projects</h2>
 <div class="grid">
 <div class="card">Gesture Control System</div>
 <div class="card">Portfolio Website</div>
 </div>
 </section>
 
-<section id="certifications" class="reveal">
-<h2>Certificates</h2>
+<section id="certifications"><h2>Certificates</h2>
 <div class="grid">
-<div class="card">Python Certificate</div>
-<div class="card">AI/ML Certificate</div>
-<div class="card">Hackathon Certificate</div>
+<a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
+<a href="#" target="_blank"><div class="card">🤖 AI/ML Certificate</div></a>
+<a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
 </div>
 </section>
 
-<section id="contact" class="reveal">
-<h2>Contact</h2>
+<section id="contact"><h2>Contact</h2>
 <div class="card">
-📧 your@email.com<br><br>
-📍 India<br><br>
+📧 your@email.com <br><br>
+📍 Your City, India <br><br>
 📱 +91 XXXXX XXXXX
 </div>
 </section>
+
+<footer>© 2026 Aditya Pandey</footer>
 
 <script>
 // MODE
@@ -253,39 +256,35 @@ glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-// PARALLAX
-document.addEventListener("mousemove",(e)=>{
-document.body.style.transform=`translate(${e.clientX*0.01}px,${e.clientY*0.01}px)`;
+// CURSOR REACT ON PROFILE
+const profile=document.getElementById("profile");
+profile.addEventListener("mouseenter",()=>{
+glow.style.transform="scale(2)";
+});
+profile.addEventListener("mouseleave",()=>{
+glow.style.transform="scale(1)";
 });
 
 // TYPING
-let t="AI/ML Student 🚀";
+const text="AI/ML Student 🚀";
 let i=0;
 function type(){
-if(i<t.length){
-document.getElementById("typing").innerHTML+=t[i++];
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
 setTimeout(type,50);
 }
 }
 type();
 
-// ROLES
-let roles=["I build AI","I create apps","I solve problems"];
+// ROTATING ROLES
+const roles=["I build AI Projects","I create Web Apps","I solve real problems"];
 let j=0;
+
 setInterval(()=>{
-document.getElementById("roles").innerText=roles[j];
+document.getElementById("roles").innerHTML=roles[j];
 j=(j+1)%roles.length;
 },2000);
-
-// SCROLL
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-reveals.forEach(el=>{
-if(el.getBoundingClientRect().top<window.innerHeight-100){
-el.classList.add("active");
-}
-});
-});
 </script>
 
 </body>
