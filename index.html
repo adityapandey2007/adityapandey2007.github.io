@@ -14,6 +14,7 @@
     --card:rgba(255,255,255,0.08);
 }
 
+/* LIGHT MODE */
 .light {
     --bg:#f8fafc;
     --text:#0f172a;
@@ -25,9 +26,10 @@ body{
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
+    overflow-x:hidden;
 }
 
-/* 🌊 BG */
+/* 🌊 PARALLAX BG */
 body::before{
     content:"";
     position:fixed;
@@ -35,18 +37,21 @@ body::before{
     height:200%;
     background: radial-gradient(circle,#38bdf8,transparent),
                 radial-gradient(circle,#6366f1,transparent);
-    animation: move 12s infinite alternate;
     z-index:-1;
+    transition:transform 0.2s;
 }
 
-/* NAV */
+/* NAVBAR GLASS */
 nav{
     display:flex;
     justify-content:space-between;
     padding:20px 50px;
-    position:sticky;
+    position:fixed;
+    width:100%;
     top:0;
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(15px);
+    background:rgba(0,0,0,0.3);
+    z-index:1000;
 }
 
 nav a{
@@ -57,42 +62,34 @@ nav a{
 
 /* HERO */
 #hero{
+    padding-top:140px;
     text-align:center;
-    padding:120px 20px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
 }
 
 /* PROFILE */
 .profile-wrapper{
+    display:inline-block;
     padding:12px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
-    margin-bottom:20px;
 
-    animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
+    animation:float 4s infinite ease-in-out, glow 3s infinite;
 }
 
 .profile-pic{
     width:200px;
-    height:auto;
     border-radius:16px;
 }
 
 /* FLOAT */
 @keyframes float{
-    0%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
-    100%{transform:translateY(0);}
 }
 
 /* GLOW */
-@keyframes glowPulse{
-    0%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
+@keyframes glow{
     50%{box-shadow:0 0 30px rgba(168,85,247,0.6);}
-    100%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
 }
 
 /* TEXT */
@@ -102,38 +99,26 @@ nav a{
     background-size:300%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:shine 5s linear infinite;
+    animation:shine 5s infinite linear;
 }
-
 @keyframes shine{
-    0%{background-position:0%}
-    100%{background-position:300%}
+    to{background-position:300%;}
 }
 
 /* BUTTON */
 .btn{
+    margin:20px 0;
     padding:12px 25px;
     background:linear-gradient(45deg,#38bdf8,#6366f1);
     border-radius:6px;
     color:white;
     text-decoration:none;
-    margin:20px 0;
 }
 
 /* SOCIAL */
 .social i{
     margin:10px;
     font-size:22px;
-}
-
-/* CURSOR */
-.cursor-glow{
-    position:fixed;
-    width:40px;
-    height:40px;
-    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
-    border-radius:50%;
-    pointer-events:none;
 }
 
 /* SECTIONS */
@@ -148,24 +133,34 @@ section{
     background:var(--card);
     padding:25px;
     border-radius:15px;
-    margin:20px 0;
 }
 
 /* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 }
 
-/* TYPING */
-#typing::after{
-    content:"|";
-    animation:blink 1s infinite;
+/* CURSOR */
+.cursor-glow{
+    position:fixed;
+    width:40px;
+    height:40px;
+    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
+    border-radius:50%;
+    pointer-events:none;
 }
 
-@keyframes blink{
-    50%{opacity:0;}
+/* REVEAL */
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 </style>
 </head>
@@ -187,68 +182,63 @@ section{
 </nav>
 
 <header id="hero">
-
-<div class="profile-wrapper" id="profile">
+<div class="profile-wrapper">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 </div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
-
 <p id="typing"></p>
 <p id="roles"></p>
 
 <a href="#" class="btn">Download Resume</a>
 
 <div class="social">
-<a href="https://www.instagram.com/adityaaah4uall?igsh=NXF0YW00djdxNXoz"><i class="fab fa-instagram"></i></a>
-<a href="https://www.linkedin.com/in/aditya-pandey-a33798379?utm_source=share_via&utm_content=profile&utm_medium=member_android"><i class="fab fa-linkedin"></i></a>
-<a href="https://github.com/adityapandey2007"><i class="fab fa-github"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
+<i class="fab fa-instagram"></i>
+<i class="fab fa-linkedin"></i>
+<i class="fab fa-github"></i>
+<i class="fas fa-envelope"></i>
 </div>
-
 </header>
 
-<section id="about"><h2>About</h2><div class="card">I am a passionate and dedicated B.Tech student specializing in Computer Science and Engineering with a focus on Artificial Intelligence and Machine Learning at Lovely Professional University. As a first-year student, I am building a strong foundation in programming, problem-solving, and core computer science concepts.
+<section id="about" class="reveal">
+<h2>About</h2>
+<div class="card">AI/ML student building real-world solutions.</div>
+</section>
 
-I have a keen interest in emerging technologies such as AI, automation, and smart systems. I enjoy exploring how technology can be used to solve real-world problems and improve everyday life. I am continuously learning and enhancing my skills in languages like Python and gaining hands-on experience through academic projects and personal practice.
-
-I am highly motivated, adaptable, and always eager to learn new tools and technologies. My goal is to grow as a skilled software developer and AI engineer, contributing to innovative and impactful projects in the future.
-
-Apart from academics, I am actively working on developing my portfolio and improving my technical and communication skills to prepare myself for industry challenges.
-</div></section>
-
-<section id="skills"><h2>Skills</h2>
+<section id="skills" class="reveal">
+<h2>Skills</h2>
 <div class="grid">
-<div class="card">Python Language</div>
-<div class="card">C Language</div>
-<div class="card">HTML | CSS | JavaScript</div>
+<div class="card">Python</div>
+<div class="card">C</div>
+<div class="card">Web Dev</div>
 </div>
 </section>
 
-<section id="projects"><h2>Projects</h2>
+<section id="projects" class="reveal">
+<h2>Projects</h2>
 <div class="grid">
-<div class="card">Smart Multi-Modal Gesture-Based Light and Fan Control System with Adaptive Automation</div>
+<div class="card">Gesture Control System</div>
 <div class="card">Portfolio Website</div>
 </div>
 </section>
 
-<section id="certifications"><h2>Certificates</h2>
+<section id="certifications" class="reveal">
+<h2>Certificates</h2>
 <div class="grid">
-<a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
-<a href="#" target="_blank"><div class="card">🤖 AI/ML Certificate</div></a>
-<a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
+<div class="card">Python Certificate</div>
+<div class="card">AI/ML Certificate</div>
+<div class="card">Hackathon Certificate</div>
 </div>
 </section>
 
-<section id="contact"><h2>Contact</h2>
+<section id="contact" class="reveal">
+<h2>Contact</h2>
 <div class="card">
-📧 adityapandey2007dav@gmail.com <br><br>
-📍 Punjab Phagwara, India <br><br>
-📱 +91 7903917024
+📧 your@email.com<br><br>
+📍 India<br><br>
+📱 +91 XXXXX XXXXX
 </div>
 </section>
-
-<footer>© 2026 Aditya Pandey</footer>
 
 <script>
 // MODE
@@ -263,35 +253,39 @@ glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-// CURSOR REACT ON PROFILE
-const profile=document.getElementById("profile");
-profile.addEventListener("mouseenter",()=>{
-glow.style.transform="scale(2)";
-});
-profile.addEventListener("mouseleave",()=>{
-glow.style.transform="scale(1)";
+// PARALLAX
+document.addEventListener("mousemove",(e)=>{
+document.body.style.transform=`translate(${e.clientX*0.01}px,${e.clientY*0.01}px)`;
 });
 
 // TYPING
-const text="AI/ML Student 🚀";
+let t="AI/ML Student 🚀";
 let i=0;
 function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
+if(i<t.length){
+document.getElementById("typing").innerHTML+=t[i++];
 setTimeout(type,50);
 }
 }
 type();
 
-// ROTATING ROLES
-const roles=["I build AI Projects","I create Web Apps","I solve real problems"];
+// ROLES
+let roles=["I build AI","I create apps","I solve problems"];
 let j=0;
-
 setInterval(()=>{
-document.getElementById("roles").innerHTML=roles[j];
+document.getElementById("roles").innerText=roles[j];
 j=(j+1)%roles.length;
 },2000);
+
+// SCROLL
+const reveals=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>{
+reveals.forEach(el=>{
+if(el.getBoundingClientRect().top<window.innerHeight-100){
+el.classList.add("active");
+}
+});
+});
 </script>
 
 </body>
