@@ -20,6 +20,10 @@
     --card:rgba(0,0,0,0.05);
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
     font-family:-apple-system;
@@ -39,6 +43,18 @@ body::before{
     z-index:-1;
 }
 
+/* 🌌 GRID FUTURISTIC */
+body::after{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:40px 40px;
+    z-index:-1;
+}
+
 /* NAV */
 nav{
     display:flex;
@@ -53,6 +69,11 @@ nav a{
     margin:0 10px;
     color:var(--text);
     text-decoration:none;
+}
+
+nav a:hover{
+    color:#a855f7;
+    text-shadow:0 0 10px #a855f7;
 }
 
 /* HERO */
@@ -71,7 +92,6 @@ nav a{
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
     margin-bottom:20px;
-
     animation: float 4s ease-in-out infinite, glowPulse 3s infinite;
 }
 
@@ -83,16 +103,12 @@ nav a{
 
 /* FLOAT */
 @keyframes float{
-    0%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
-    100%{transform:translateY(0);}
 }
 
 /* GLOW */
 @keyframes glowPulse{
-    0%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
     50%{box-shadow:0 0 30px rgba(168,85,247,0.6);}
-    100%{box-shadow:0 0 10px rgba(168,85,247,0.3);}
 }
 
 /* TEXT */
@@ -103,11 +119,14 @@ nav a{
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:shine 5s linear infinite;
+
+    text-shadow:
+        0 0 10px rgba(56,189,248,0.6),
+        0 0 20px rgba(99,102,241,0.6);
 }
 
 @keyframes shine{
-    0%{background-position:0%}
-    100%{background-position:300%}
+    to{background-position:300%;}
 }
 
 /* BUTTON */
@@ -120,10 +139,38 @@ nav a{
     margin:20px 0;
 }
 
+.btn:hover{
+    box-shadow:0 0 20px #6366f1;
+}
+
 /* SOCIAL */
 .social i{
     margin:10px;
     font-size:22px;
+}
+
+/* CARDS */
+.card{
+    background:var(--card);
+    padding:25px;
+    border-radius:15px;
+    margin:20px 0;
+    transition:0.3s;
+}
+
+.card:hover{
+    box-shadow:
+        0 0 10px #38bdf8,
+        0 0 20px #6366f1,
+        0 0 40px #a855f7;
+    transform:translateY(-5px);
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
 /* CURSOR */
@@ -141,21 +188,6 @@ section{
     padding:100px 50px;
     max-width:1200px;
     margin:auto;
-}
-
-/* CARDS */
-.card{
-    background:var(--card);
-    padding:25px;
-    border-radius:15px;
-    margin:20px 0;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
 }
 
 /* TYPING */
@@ -200,51 +232,44 @@ section{
 <a href="#" class="btn">Download Resume</a>
 
 <div class="social">
-<a href="https://www.instagram.com/adityaaah4uall?igsh=NXF0YW00djdxNXoz"><i class="fab fa-instagram"></i></a>
-<a href="https://www.linkedin.com/in/aditya-pandey-a33798379?utm_source=share_via&utm_content=profile&utm_medium=member_android"><i class="fab fa-linkedin"></i></a>
+<a href="https://www.instagram.com/adityaaah4uall"><i class="fab fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/aditya-pandey-a33798379"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/adityapandey2007"><i class="fab fa-github"></i></a>
 <a href="#"><i class="fas fa-envelope"></i></a>
 </div>
 
 </header>
 
-<section id="about"><h2>About</h2><div class="card">I am a passionate and dedicated B.Tech student specializing in Computer Science and Engineering with a focus on Artificial Intelligence and Machine Learning at Lovely Professional University. As a first-year student, I am building a strong foundation in programming, problem-solving, and core computer science concepts.
-
-I have a keen interest in emerging technologies such as AI, automation, and smart systems. I enjoy exploring how technology can be used to solve real-world problems and improve everyday life. I am continuously learning and enhancing my skills in languages like Python and gaining hands-on experience through academic projects and personal practice.
-
-I am highly motivated, adaptable, and always eager to learn new tools and technologies. My goal is to grow as a skilled software developer and AI engineer, contributing to innovative and impactful projects in the future.
-
-Apart from academics, I am actively working on developing my portfolio and improving my technical and communication skills to prepare myself for industry challenges.
-</div></section>
+<section id="about"><h2>About</h2><div class="card">AI/ML student building real-world solutions.</div></section>
 
 <section id="skills"><h2>Skills</h2>
 <div class="grid">
-<div class="card">Python Language</div>
-<div class="card">C Language</div>
-<div class="card">HTML | CSS | JavaScript</div>
+<div class="card">Python</div>
+<div class="card">C</div>
+<div class="card">HTML | CSS | JS</div>
 <div class="card">SQL</div>
 </div>
 </section>
 
 <section id="projects"><h2>Projects</h2>
 <div class="grid">
-<div class="card">Smart Multi-modal Gesture-based Light And Fan Control System</div>
+<div class="card">Gesture Control System</div>
 <div class="card">Portfolio Website</div>
 </div>
 </section>
 
 <section id="certifications"><h2>Certificates</h2>
 <div class="grid">
-<a href="#" target="_blank"><div class="card">🐍 Python Certificate</div></a>
-<a href="#" target="_blank"><div class="card">🤖 AI/ML Certificate</div></a>
-<a href="#" target="_blank"><div class="card">🏆 Hackathon Certificate</div></a>
+<div class="card">🐍 Python Certificate</div>
+<div class="card">🤖 AI/ML Certificate</div>
+<div class="card">🏆 Hackathon Certificate</div>
 </div>
 </section>
 
 <section id="contact"><h2>Contact</h2>
 <div class="card">
-📧 adityapandey2007@gmail.com <br><br>
-📍 Punjab Phagwara, India <br><br>
+📧 adityapandey2007@gmail.com<br><br>
+📍 Punjab, India<br><br>
 📱 +91 7903917024
 </div>
 </section>
@@ -264,31 +289,40 @@ glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-// CURSOR REACT ON PROFILE
+// CURSOR TRAIL
+document.addEventListener("mousemove",(e)=>{
+let dot=document.createElement("div");
+dot.style.position="fixed";
+dot.style.width="5px";
+dot.style.height="5px";
+dot.style.background="#a855f7";
+dot.style.borderRadius="50%";
+dot.style.left=e.clientX+"px";
+dot.style.top=e.clientY+"px";
+dot.style.pointerEvents="none";
+document.body.appendChild(dot);
+setTimeout(()=>dot.remove(),400);
+});
+
+// PROFILE INTERACTION
 const profile=document.getElementById("profile");
-profile.addEventListener("mouseenter",()=>{
-glow.style.transform="scale(2)";
-});
-profile.addEventListener("mouseleave",()=>{
-glow.style.transform="scale(1)";
-});
+profile.addEventListener("mouseenter",()=>{glow.style.transform="scale(2)";});
+profile.addEventListener("mouseleave",()=>{glow.style.transform="scale(1)";});
 
 // TYPING
 const text="AI/ML Student 🚀";
 let i=0;
 function type(){
 if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
+document.getElementById("typing").innerHTML+=text[i++];
 setTimeout(type,50);
 }
 }
 type();
 
-// ROTATING ROLES
+// ROLES
 const roles=["I build AI Projects","I create Web Apps","I solve real problems"];
 let j=0;
-
 setInterval(()=>{
 document.getElementById("roles").innerHTML=roles[j];
 j=(j+1)%roles.length;
