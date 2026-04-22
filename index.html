@@ -6,6 +6,7 @@
 <title>Aditya Pandey</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <style>
 :root {
@@ -20,9 +21,7 @@
     --card:rgba(0,0,0,0.05);
 }
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
     margin:0;
@@ -31,20 +30,14 @@ body{
     color:var(--text);
 }
 
-/* 🌊 BG */
-body::before{
-    content:"";
+/* 🎮 3D Canvas */
+#bg-canvas{
     position:fixed;
-    width:200%;
-    height:200%;
-    background: radial-gradient(circle,#38bdf8,transparent),
-                radial-gradient(circle,#6366f1,transparent);
-    animation: move 12s infinite alternate;
-    z-index:-1;
-}
-
-@keyframes move{
-    50%{transform:translate(-150px,-150px);}
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-10;
 }
 
 /* NAV */
@@ -84,7 +77,6 @@ nav a{
 
 .profile-pic{
     width:200px;
-    height:auto;
     border-radius:16px;
 }
 
@@ -159,7 +151,7 @@ section{
     position:fixed;
     width:40px;
     height:40px;
-    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
+    background: radial-gradient(circle, rgba(168,85,247,0.4), transparent);
     border-radius:50%;
     pointer-events:none;
 }
@@ -170,12 +162,12 @@ section{
     animation:blink 1s infinite;
 }
 @keyframes blink{50%{opacity:0;}}
-
 </style>
 </head>
 
 <body>
 
+<canvas id="bg-canvas"></canvas>
 <div class="cursor-glow"></div>
 
 <nav>
@@ -191,7 +183,6 @@ section{
 </nav>
 
 <header id="hero">
-
 <div class="profile-wrapper" id="profile">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 </div>
@@ -207,16 +198,12 @@ section{
 <a href="https://www.instagram.com/adityaaah4uall"><i class="fab fa-instagram"></i></a>
 <a href="https://www.linkedin.com/in/aditya-pandey-a33798379"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/adityapandey2007"><i class="fab fa-github"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
 </div>
-
 </header>
 
 <section id="about">
 <h2>About</h2>
-<div class="card">
-I am a passionate AI/ML student building real-world solutions.
-</div>
+<div class="card">AI/ML student building real-world solutions.</div>
 </section>
 
 <section id="skills">
@@ -260,24 +247,24 @@ I am a passionate AI/ML student building real-world solutions.
 </footer>
 
 <script>
-// MODE
+// 🌙 MODE
 function toggleMode(){
 document.body.classList.toggle("light");
 }
 
-// CURSOR
+// 🟣 CURSOR
 const glow=document.querySelector(".cursor-glow");
 document.addEventListener("mousemove",(e)=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-// PROFILE INTERACTION
+// 🎯 PROFILE INTERACTION
 const profile=document.getElementById("profile");
 profile.addEventListener("mouseenter",()=>{glow.style.transform="scale(2)";});
 profile.addEventListener("mouseleave",()=>{glow.style.transform="scale(1)";});
 
-// TYPING
+// ⌨️ TYPING
 const text="AI/ML Student 🚀";
 let i=0;
 function type(){
@@ -287,13 +274,46 @@ setTimeout(type,50);
 }}
 type();
 
-// ROLES
-const roles=["I build AI Projects","I create Web Apps","I solve real problems"];
+// 🔁 ROLES
+const roles=["I build AI Projects","I create Web Apps","I solve problems"];
 let j=0;
 setInterval(()=>{
 document.getElementById("roles").innerHTML=roles[j];
 j=(j+1)%roles.length;
 },2000);
+
+// 🎮 THREE JS BACKGROUND
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer = new THREE.WebGLRenderer({
+canvas:document.getElementById("bg-canvas"),
+alpha:true
+});
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+const geometry = new THREE.TorusGeometry(10,3,16,100);
+const material = new THREE.MeshBasicMaterial({
+color:0x00ffff,
+wireframe:true
+});
+const torus = new THREE.Mesh(geometry,material);
+scene.add(torus);
+
+camera.position.z=30;
+
+function animate(){
+requestAnimationFrame(animate);
+torus.rotation.x+=0.01;
+torus.rotation.y+=0.01;
+renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+renderer.setSize(window.innerWidth,window.innerHeight);
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+});
 </script>
 
 </body>
