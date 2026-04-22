@@ -7,61 +7,31 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- 🔥 THREE JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
 <style>
 :root {
     --bg:#0f172a;
     --text:#ffffff;
-    --card:rgba(255,255,255,0.08);
 }
-
-.light {
-    --bg:#f8fafc;
-    --text:#0f172a;
-    --card:rgba(0,0,0,0.05);
-}
-
-html{scroll-behavior:smooth;}
 
 body{
     margin:0;
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
+    overflow-x:hidden;
 }
 
-/* 🌊 BG */
-body::before{
-    content:"";
+/* 🎮 3D CANVAS */
+#bg-canvas{
     position:fixed;
-    width:200%;
-    height:200%;
-    background: radial-gradient(circle,#38bdf8,transparent),
-                radial-gradient(circle,#6366f1,transparent);
-    animation: move 12s infinite alternate;
-    z-index:-2;
-}
-
-/* 🌌 GRID */
-body::after{
-    content:"";
-    position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
-    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size:40px 40px;
-    z-index:-1;
-}
-
-/* ⚡ Scanlines */
-body::after{
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0,255,255,0.05) 0px,
-        rgba(0,255,255,0.05) 1px,
-        transparent 1px,
-        transparent 3px
-    );
+    z-index:-3;
 }
 
 /* NAV */
@@ -72,37 +42,21 @@ nav{
     position:sticky;
     top:0;
     backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(0,255,255,0.2);
-}
-
-nav a{
-    margin:0 10px;
-    color:var(--text);
-    text-decoration:none;
-}
-
-nav a:hover{
-    color:#0ff;
-    text-shadow:0 0 10px #0ff;
 }
 
 /* HERO */
 #hero{
     text-align:center;
     padding:120px 20px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
 }
 
 /* PROFILE */
 .profile-wrapper{
+    display:inline-block;
     padding:12px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    margin-bottom:20px;
-    animation: float 4s infinite ease-in-out, glow 3s infinite;
+    animation:float 4s infinite ease-in-out;
 }
 
 .profile-pic{
@@ -110,25 +64,16 @@ nav a:hover{
     border-radius:16px;
 }
 
+/* FLOAT */
 @keyframes float{
     50%{transform:translateY(-10px);}
 }
 
-@keyframes glow{
-    50%{box-shadow:0 0 30px #a855f7;}
-}
-
-/* ⚡ GLITCH NAME */
+/* NAME */
 .gradient-text{
     font-size:50px;
     color:#fff;
-    animation: glitch 2s infinite;
-}
-
-@keyframes glitch{
-    0%{text-shadow:2px 0 #0ff,-2px 0 #f0f;}
-    50%{text-shadow:-2px 0 #0ff,2px 0 #f0f;}
-    100%{text-shadow:none;}
+    text-shadow:0 0 20px #0ff,0 0 40px #f0f;
 }
 
 /* BUTTON */
@@ -138,168 +83,78 @@ nav a:hover{
     border-radius:6px;
     color:white;
     text-decoration:none;
-    margin:20px 0;
 }
 
-/* SOCIAL */
-.social i{
-    margin:10px;
-    font-size:22px;
-}
-
-/* CARD HOLOGRAM */
-.card{
-    background:linear-gradient(120deg,rgba(255,255,255,0.05),rgba(168,85,247,0.1));
-    padding:25px;
-    border-radius:15px;
-    margin:20px 0;
-    border:1px solid rgba(255,255,255,0.1);
-    backdrop-filter:blur(15px);
-    transition:0.3s;
-}
-
-.card:hover{
-    box-shadow:0 0 30px #a855f7;
-}
-
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-/* CURSOR */
-.cursor-glow{
+/* AI CHAT */
+.chatbot{
     position:fixed;
-    width:40px;
-    height:40px;
-    background: radial-gradient(circle, rgba(168,85,247,0.5), transparent);
-    border-radius:50%;
-    pointer-events:none;
+    bottom:20px;
+    right:20px;
 }
 
-/* SECTION */
-section{
-    padding:100px 50px;
-    max-width:1200px;
-    margin:auto;
+.chatbox{
+    display:none;
+    width:250px;
+    background:#111;
+    padding:10px;
+    border-radius:10px;
 }
-
-h2{
-    color:#0ff;
-    text-shadow:0 0 10px #0ff;
-}
-
-/* TYPING */
-#typing::after{
-    content:"|";
-    animation:blink 1s infinite;
-}
-@keyframes blink{50%{opacity:0;}}
 </style>
 </head>
 
 <body>
 
-<div class="cursor-glow"></div>
+<canvas id="bg-canvas"></canvas>
 
 <nav>
 <h2>Aditya</h2>
-<div>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#certifications">Certificates</a>
-<a href="#contact">Contact</a>
-<span onclick="toggleMode()">🌓</span>
-</div>
 </nav>
 
 <header id="hero">
-<div class="profile-wrapper" id="profile">
+
+<div class="profile-wrapper">
 <img src="https://raw.githubusercontent.com/adityapandey2007/adityapandey2007.github.io/main/IMG_20260212_193928.jpg" class="profile-pic">
 </div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
 <p id="typing"></p>
-<p id="roles"></p>
 
 <a href="#" class="btn">Download Resume</a>
 
-<div class="social">
-<a href="https://www.instagram.com/adityaaah4uall"><i class="fab fa-instagram"></i></a>
-<a href="https://www.linkedin.com/in/aditya-pandey-a33798379"><i class="fab fa-linkedin"></i></a>
-<a href="https://github.com/adityapandey2007"><i class="fab fa-github"></i></a>
-<a href="#"><i class="fas fa-envelope"></i></a>
-</div>
 </header>
 
-<section id="about"><h2>About</h2><div class="card">AI/ML student building real-world solutions.</div></section>
-
-<section id="skills"><h2>Skills</h2>
-<div class="grid">
-<div class="card">Python</div>
-<div class="card">C</div>
-<div class="card">HTML | CSS | JS</div>
-<div class="card">SQL</div>
+<!-- 🤖 CHATBOT -->
+<div class="chatbot">
+<button onclick="toggleChat()">🤖</button>
+<div class="chatbox" id="chatbox">
+<p>Hello! I'm your AI assistant 👋</p>
 </div>
-</section>
-
-<section id="projects"><h2>Projects</h2>
-<div class="grid">
-<div class="card">Gesture Control System</div>
-<div class="card">Portfolio Website</div>
 </div>
-</section>
-
-<section id="certifications"><h2>Certificates</h2>
-<div class="grid">
-<div class="card">🐍 Python Certificate</div>
-<div class="card">🤖 AI/ML Certificate</div>
-<div class="card">🏆 Hackathon Certificate</div>
-</div>
-</section>
-
-<section id="contact"><h2>Contact</h2>
-<div class="card">
-📧 adityapandey2007@gmail.com<br><br>
-📍 Punjab, India<br><br>
-📱 +91 7903917024
-</div>
-</section>
 
 <script>
-// MODE
-function toggleMode(){
-document.body.classList.toggle("light");
-}
+// 🎮 THREE JS BACKGROUND
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer = new THREE.WebGLRenderer({canvas:document.getElementById("bg-canvas")});
+renderer.setSize(window.innerWidth,window.innerHeight);
 
-// CURSOR
-const glow=document.querySelector(".cursor-glow");
-document.addEventListener("mousemove",(e)=>{
-glow.style.left=e.clientX+"px";
-glow.style.top=e.clientY+"px";
-});
+const geometry = new THREE.TorusGeometry(10,3,16,100);
+const material = new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true});
+const torus = new THREE.Mesh(geometry,material);
 
-// CLICK SPARKS
-document.addEventListener("click",(e)=>{
-for(let i=0;i<8;i++){
-let s=document.createElement("div");
-s.style.position="fixed";
-s.style.width="4px";
-s.style.height="4px";
-s.style.background="#0ff";
-s.style.left=e.clientX+"px";
-s.style.top=e.clientY+"px";
-s.style.borderRadius="50%";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),400);
+scene.add(torus);
+camera.position.z=30;
+
+function animate(){
+requestAnimationFrame(animate);
+torus.rotation.x+=0.01;
+torus.rotation.y+=0.01;
+renderer.render(scene,camera);
 }
-});
+animate();
 
 // TYPING
-const text="AI/ML Student 🚀";
+let text="AI/ML Developer 🚀";
 let i=0;
 function type(){
 if(i<text.length){
@@ -308,13 +163,11 @@ setTimeout(type,50);
 }}
 type();
 
-// ROLES
-const roles=["I build AI","I create apps","I solve problems"];
-let j=0;
-setInterval(()=>{
-document.getElementById("roles").innerText=roles[j];
-j=(j+1)%roles.length;
-},2000);
+// CHATBOT
+function toggleChat(){
+let box=document.getElementById("chatbox");
+box.style.display=box.style.display==="block"?"none":"block";
+}
 </script>
 
 </body>
