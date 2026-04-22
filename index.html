@@ -7,9 +7,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- 🔥 THREE JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-
 <style>
 :root {
     --bg:#0f172a;
@@ -21,94 +18,104 @@ body{
     font-family:-apple-system;
     background:var(--bg);
     color:var(--text);
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
-/* 🎮 3D CANVAS */
-#bg-canvas{
+/* 🌌 Cyberpunk Background */
+body::before{
+    content:"";
     position:fixed;
-    top:0;
-    left:0;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle,#38bdf8,transparent),
+                radial-gradient(circle,#6366f1,transparent);
+    animation: move 12s infinite alternate;
+    z-index:-2;
+}
+
+/* ⚡ Grid + scanline */
+body::after{
+    content:"";
+    position:fixed;
     width:100%;
     height:100%;
-    z-index:-3;
+    background:
+    repeating-linear-gradient(0deg,rgba(0,255,255,0.05) 0px,rgba(0,255,255,0.05) 1px,transparent 1px,transparent 3px),
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:100% 100%,40px 40px,40px 40px;
+    z-index:-1;
 }
 
-/* NAV */
-nav{
-    display:flex;
-    justify-content:space-between;
-    padding:20px 50px;
-    position:sticky;
-    top:0;
-    backdrop-filter:blur(10px);
+@keyframes move{
+    50%{transform:translate(-150px,-150px);}
 }
 
-/* HERO */
+/* 🎯 HERO CENTER */
 #hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
     text-align:center;
-    padding:120px 20px;
 }
 
-/* PROFILE */
+/* 📸 PROFILE */
 .profile-wrapper{
-    display:inline-block;
     padding:12px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
-    animation:float 4s infinite ease-in-out;
+    backdrop-filter:blur(10px);
+    margin-bottom:20px;
+
+    animation: float 4s infinite ease-in-out, glow 3s infinite;
 }
 
 .profile-pic{
-    width:200px;
-    border-radius:16px;
+    width:230px;
+    border-radius:18px;
 }
 
-/* FLOAT */
 @keyframes float{
     50%{transform:translateY(-10px);}
 }
 
-/* NAME */
-.gradient-text{
-    font-size:50px;
-    color:#fff;
-    text-shadow:0 0 20px #0ff,0 0 40px #f0f;
+@keyframes glow{
+    50%{box-shadow:0 0 35px #a855f7;}
 }
 
-/* BUTTON */
+/* ⚡ NAME GLOW */
+.gradient-text{
+    font-size:52px;
+    color:#fff;
+    text-shadow:
+        0 0 10px #0ff,
+        0 0 20px #0ff,
+        0 0 40px #f0f;
+}
+
+/* 📄 BUTTON */
 .btn{
-    padding:12px 25px;
+    margin-top:20px;
+    padding:14px 30px;
+    font-size:16px;
     background:linear-gradient(45deg,#38bdf8,#6366f1);
-    border-radius:6px;
+    border-radius:8px;
     color:white;
     text-decoration:none;
+    box-shadow:0 0 20px #6366f1;
+    transition:0.3s;
 }
 
-/* AI CHAT */
-.chatbot{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-}
-
-.chatbox{
-    display:none;
-    width:250px;
-    background:#111;
-    padding:10px;
-    border-radius:10px;
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px #a855f7;
 }
 </style>
 </head>
 
 <body>
-
-<canvas id="bg-canvas"></canvas>
-
-<nav>
-<h2>Aditya</h2>
-</nav>
 
 <header id="hero">
 
@@ -117,58 +124,10 @@ nav{
 </div>
 
 <h1 class="gradient-text">Aditya Pandey</h1>
-<p id="typing"></p>
 
 <a href="#" class="btn">Download Resume</a>
 
 </header>
-
-<!-- 🤖 CHATBOT -->
-<div class="chatbot">
-<button onclick="toggleChat()">🤖</button>
-<div class="chatbox" id="chatbox">
-<p>Hello! I'm your AI assistant 👋</p>
-</div>
-</div>
-
-<script>
-// 🎮 THREE JS BACKGROUND
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-const renderer = new THREE.WebGLRenderer({canvas:document.getElementById("bg-canvas")});
-renderer.setSize(window.innerWidth,window.innerHeight);
-
-const geometry = new THREE.TorusGeometry(10,3,16,100);
-const material = new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true});
-const torus = new THREE.Mesh(geometry,material);
-
-scene.add(torus);
-camera.position.z=30;
-
-function animate(){
-requestAnimationFrame(animate);
-torus.rotation.x+=0.01;
-torus.rotation.y+=0.01;
-renderer.render(scene,camera);
-}
-animate();
-
-// TYPING
-let text="AI/ML Developer 🚀";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text[i++];
-setTimeout(type,50);
-}}
-type();
-
-// CHATBOT
-function toggleChat(){
-let box=document.getElementById("chatbox");
-box.style.display=box.style.display==="block"?"none":"block";
-}
-</script>
 
 </body>
 </html>
